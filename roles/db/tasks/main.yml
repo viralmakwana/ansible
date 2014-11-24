@@ -7,7 +7,7 @@
           service: name=mysqld state=started enabled=yes
 
         - name: Add a new DB and user
-          mysql_db: name=viraldb state=present
+          mysql_db: name=viraldb state=present 
         
         - name: Add permissions to viraldb
           mysql_user: name=ansible password=123 priv=viraldb.*:ALL state=present
