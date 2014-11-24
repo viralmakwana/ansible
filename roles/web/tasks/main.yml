@@ -1,0 +1,13 @@
+        - name: Install Apache
+          yum: name=httpd state=latest
+               
+        # Lets ensure Apache is set to auto start
+
+        - name: httpd service start
+          service: name=httpd state=started enabled=yes
+        
+        - name: Copy the config
+          template: src=/root/playbooks/index.html dest=/var/www/html/index.html
+
+
+
