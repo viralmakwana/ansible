@@ -1,0 +1,13 @@
+        - name: Install MySQL55
+          yum: name=mysql55-server state=latest enablerepo=ius
+               
+        # Lets ensure MySQL is set to auto start
+
+        - name: MySQL service start
+          service: name=mysqld state=started enabled=yes
+
+        - name: Add a new DB and user
+          mysqldb: name=viraldb state=present
+        
+        - name: Add permissions to viraldb
+          mysql_user: name=ansible password=123 priv=viraldb.*:ALL state=present
