@@ -1,0 +1,20 @@
+---
+        - name: Install httpd
+          gather_facts: no
+          sudo: no
+          hosts: ansible2
+         
+          # web deploy
+
+          roles:
+          - web
+
+
+
+        #- name: Install MySQL
+        #  sudo: no
+        #  hosts: all
+          
+
+         # roles:
+         # - DB

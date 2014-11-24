@@ -1,0 +1,8 @@
+---
+        - name: Install MySQL
+          sudo: no
+          hosts: all
+          
+
+          roles:
+          - db
