@@ -6,7 +6,7 @@
     - name: install nginx
       yum: name=nginx state=latest
     - name: Copy Nginx config file
-      copy: src=files/nginx.conf dest=/etc/nginx/nginx.conf
+      copy: src=files/nginx.conf dest=/etc/nginx/conf.d/ansible.conf
     - name: Copy Index.html
       copy: src=files/index.html dest=/var/html/nginx.conf mode=0644
     - name: Start Nginx
