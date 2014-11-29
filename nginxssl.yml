@@ -16,16 +16,11 @@
       file: path=/etc/nginx/ssl state=directory
     - name: Copy the SSL key
       copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
-      notify: restart nginx
     - name: Copy the SSL cert
       copy: src=files/nginx.crt dest={{ cert_file }} 
-      notify: restart nginx
     - name: Copy config file
       template: src=templates/nginx.conf.j2 dest={{ conf_file }} 
     - name: Copy the index.html into place
       copy: files/index.html dest={{ index_file }} 
-      notify: restart nginx
-  handlers:
-    - name: restart nginx
-      service: name=nginx state=started
-  
+    - name: Now restart Nginx
+      service: name=nginx state=restarted 
