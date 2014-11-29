@@ -6,7 +6,7 @@
   vars:
     key_file: /etc/nginx/ssl/nginx.key
     cert_file: /etc/nginx/ssl/nginx.crt
-    conf_file: /etc/nginx/sites-available/default
+    conf_file: /etc/nginx/conf.d/default.conf
     server_name: localhost
   tasks:
     - name: Install Nginx
@@ -15,17 +15,14 @@
       file: path=/etc/nginx/ssl state=directory
     - name: Copy the SSL key
       copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
-      notify: restart Nginx
+      notify: restart nginx
     - name: Copy the SSL cert
-      copy: files/nginx.crt dest={{ cert_file }} 
+      copy: src=files/nginx.crt dest={{ cert_file }} 
       notify: restart nginx
     - name: Copy config file
-      template: src=templates/nginx.conf.j2 dest={{ config_file }} 
-      notify: restart Nginx
-    - name: enable the config
-      file: dest=/etc/nginx/sites-enabled/default src={{ conf_file }} state=link
-      notify: restart Nginx
+      template: src=templates/nginx.conf.j2 dest={{ conf_file }} 
+      notify: restart nginx
   handlers:
-    - name: restart Nginx
-      service: name=nginx state=restarted
+    - name: restart nginx
+      service: name=nginx state=started
   
