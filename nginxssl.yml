@@ -16,6 +16,9 @@
     - name: Copy the SSL key
       copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
       notify: restart Nginx
+    - name: Copy the SSL cert
+      copy: files/nginx.crt dest={{ cert_file }} 
+      notify: restart nginx
     - name: Copy config file
       template: src=templates/nginx.conf.j2 dest={{ config_file }} 
       notify: restart Nginx
