@@ -21,6 +21,6 @@
     - name: Copy config file
       template: src=templates/nginx.conf.j2 dest={{ conf_file }} 
     - name: Copy the index.html into place
-      copy: files/index.html dest={{ index_file }} 
+      copy: src=files/index.html dest={{ index_file }} 
     - name: Now restart Nginx
       service: name=nginx state=restarted 
