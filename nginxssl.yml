@@ -1,0 +1,28 @@
+---
+- name: Configure Nginx with SSL support
+  hosts: all
+  sudo: no
+  #define some variables for the SSL information
+  vars:
+    key_file: /etc/nginx/ssl/nginx.key
+    cert_file: /etc/nginx/ssl/nginx.crt
+    conf_file: /etc/nginx/sites-available/default
+    server_name: localhost
+  tasks:
+    - name: Install Nginx
+      yum: name=nginx state=latest
+    - name: Create the directories for SSL certs
+      file: path=/etc/nginx/ssl state=directory
+    - name: Copy the SSL key
+      copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
+      notify: restart Nginx
+    - name: Copy config file
+      template: src=templates/nginx.conf.j2 dest={{ config_file }} 
+      notify: restart Nginx
+    - name: enable the config
+      file: dest=/etc/nginx/sites-enabled/default src={{ conf_file }} state=link
+      notify: restart Nginx
+  handlers:
+    - name: restart Nginx
+      service: name=nginx state=restarted
+  
