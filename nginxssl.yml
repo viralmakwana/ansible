@@ -14,15 +14,21 @@
   tasks:
     - name: Install Nginx
       yum: name=nginx state=latest
+   
     - name: Create the directories for SSL certs
       file: path=/etc/nginx/ssl state=directory
+    
     - name: Copy the SSL key
       copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
+   
     - name: Copy the SSL cert
       copy: src=files/nginx.crt dest={{ cert_file }} 
+   
     - name: Copy config file
       template: src=templates/nginx.conf.j2 dest={{ conf_file }} 
-    - name: Copy the index.html into place
-      copy: src=files/index.html dest={{ index_file }} 
-    - name: Now restart Nginx
-      service: name=nginx state=restarted 
+    
+     - name: Copy the index.html into place
+       copy: src=files/index.html dest={{ index_file }} 
+     
+     - name: Now restart Nginx
+       service: name=nginx state=restarted 
