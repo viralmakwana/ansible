@@ -1,5 +1,5 @@
 ---
-- name: Configure Nginx
+- name: Configuration of Nginx - Standard setup
   hosts: all
   sudo: no
   tasks:
