@@ -7,7 +7,7 @@ HOST=$(hostname)
 echo "Please tell me your user name, then press [ENTER]: "
 read -rse user
 
-if [ id -u "$user" &> /dev/null] ; then echo "$user does exist, lets continue....";
+if [ id -u "$user" > /dev/null 2>&1 ] ; then echo "$user does exist, lets continue....";
 	else echo "$user does not exist on $HOST, would you like to add this user [y/n]: "
 	read -rse adduser
 if [ "$adduser" == "y" ]; then
