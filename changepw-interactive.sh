@@ -10,6 +10,7 @@ read -rse user
 if [ id -u "$user" &> /dev/null] ; then echo "$user does exist, lets continue....";
 	else echo "$user does not exist on $HOST, would you like to add this user [y/n]: "
 	read -rse adduser
+
 if [ "$adduser" == "y" ]; then
 	useradd -m $user
 elif [ "$adduser" == "n" ]; then
