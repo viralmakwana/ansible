@@ -8,7 +8,8 @@ echo "Please tell me your user name, then press [ENTER]: "
 read -re user
 
 if $(grep "$user" /etc/passwd > /dev/null 2>&1); then 
-	echo "$user does exist, exiting"
+	echo "$user already exists on $HOST, to reset the password, just run: 
+	passwd "$user""
 exit 1
 	else echo "$user does not exist on $HOST, would you like to add this user [y/n]: "
 	read -rse adduser
@@ -29,4 +30,3 @@ else
 	exit 3
 fi
 fi
-
