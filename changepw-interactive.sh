@@ -1,16 +1,17 @@
 #!/bin/bash
 #author: Viral Makwana
-#Purpose: Simple script to add password for user, or create user/w password. Prompts for user input via read.
+#Purpose: Simple script to add user if it doesnt exist and set pw
 
 HOST=$(hostname)
 
 echo "Please tell me your user name, then press [ENTER]: "
 read -rse user
 
-if [ id -u "$user" &> /dev/null] ; then echo "$user does exist, lets continue....";
+if $(grep "$user" /etc/passwd > /dev/null 2>&1); then 
+	echo "$user does exist, exiting"
+exit 1
 	else echo "$user does not exist on $HOST, would you like to add this user [y/n]: "
 	read -rse adduser
-
 if [ "$adduser" == "y" ]; then
 	useradd -m $user
 elif [ "$adduser" == "n" ]; then
@@ -28,3 +29,4 @@ else
 	exit 501
 fi
 fi
+
