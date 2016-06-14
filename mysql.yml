@@ -1,5 +1,5 @@
 ---
-        - name: Install MySQL
+        - name: Install MySQL, development package
           sudo: no
           hosts: all
           
