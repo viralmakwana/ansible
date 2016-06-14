@@ -1,5 +1,5 @@
 ---
-        - name: Install httpd
+        - name: Put httpd
           gather_facts: no
           sudo: no
           hosts: ansible2
